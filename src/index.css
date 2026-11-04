@@ -1,5 +1,36 @@
+@import 'tailwindcss';
 @import '@fontsource-variable/bricolage-grotesque';
 @import '@fontsource-variable/jetbrains-mono';
+
+/* Colors taken from the CV PDF */
+@theme {
+  --color-ink: #0a0a0a;
+  --color-body: #3f4752;
+  --color-muted: #5f6875;
+  --color-panel: #f5f8fa;
+  --color-accent: #b20337;
+  --color-line: rgba(10, 10, 10, .13);
+  --font-display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --spacing-gut: clamp(20px, 4vw, 64px);
+  --breakpoint-md: 56.25rem;
+  --animate-ring: ring 2s infinite;
+
+  @keyframes ring {
+    from { box-shadow: 0 0 0 0 rgba(178, 3, 55, .6); }
+    to { box-shadow: 0 0 0 10px rgba(178, 3, 55, 0); }
+  }
+}
+
+@layer base {
+  html { line-height: normal; background: var(--color-white); color: var(--color-ink); font-family: var(--font-display); -webkit-font-smoothing: antialiased; }
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  body { overflow-x: clip; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+  ::selection { background: var(--color-accent); color: var(--color-white); }
+}
 
 /* Colors taken from the CV PDF */
 :root {
