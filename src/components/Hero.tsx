@@ -49,7 +49,6 @@ function Roles() {
 export default function Hero({ ready, repos, still }: { ready: boolean; repos: Repo[]; still: boolean }) {
   const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 800], [0, -160])
-  const opacity = useTransform(scrollY, [0, 620], [1, 0])
   const latest = repos[0]
   const { lang, t } = useLang()
   return (
@@ -60,7 +59,7 @@ export default function Hero({ ready, repos, still }: { ready: boolean; repos: R
       {still || lowPower
         ? <img className="absolute inset-0 size-full object-cover dark:mix-blend-screen dark:invert dark:hue-rotate-180" src={`${import.meta.env.BASE_URL}assets/wave.webp`} alt="" width={1280} height={800} />
         : <div className="absolute inset-0"><Suspense fallback={null}><Field /></Suspense></div>}
-      <motion.div className="pointer-events-none relative z-1 flex flex-1 flex-col justify-end gap-[clamp(14px,2.4vh,28px)] px-gut pt-24 pb-[clamp(24px,4vh,44px)]" style={{ y, opacity }}>
+      <motion.div className="pointer-events-none relative z-1 flex flex-1 flex-col justify-end gap-[clamp(14px,2.4vh,28px)] px-gut pt-24 pb-[clamp(24px,4vh,44px)]" style={{ y }}>
         <motion.div className="flex justify-between font-mono text-[clamp(12px,1.2vw,15px)] text-accent-text" initial={{ opacity: 0 }} animate={ready ? { opacity: 1 } : undefined} transition={{ delay: 0.7 }}>
           <Roles />
           <span className="hidden md:inline">{t.place}</span>
