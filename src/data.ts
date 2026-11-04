@@ -7,6 +7,8 @@ import {
 
 export const USER = 'AdyanMidzic08'
 export const EMAIL = 'a.midzic2@students.htl-leonding.ac.at'
+export const LOCATION = 'Ansfelden, Austria'
+export const PRIVACY = 'This site sets no cookies and uses no tracking. To show my projects, your browser requests public data directly from the GitHub API, which sends your IP address to GitHub, Inc. (USA). My hosting provider may process your IP address in technical server logs to deliver the site. Both rest on my legitimate interest in presenting my work (Art. 6(1)(f) GDPR). If you email me, I use your message only to reply. You have the right to access, rectify, erase and restrict your data and to object, and you can complain to the Austrian Data Protection Authority (dsb.gv.at).'
 export const NAV = ['about', 'work', 'experience', 'cv', 'contact']
 export const ROLES = ['Web Developer', 'Software Engineer', 'Full-Stack Developer']
 export const ABOUT = "Hey, I'm Adyan, a student at HTL Leonding in Austria. TypeScript is my favorite language and React.js my favorite library. I love coding and turning ideas into things people enjoy using."

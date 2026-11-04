@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react'
-import { EMAIL, USER } from '../data'
+import { EMAIL, LOCATION, PRIVACY, USER } from '../data'
 import { contactButton, contactGhostButton, cta } from '../ui'
 import Magnetic from './Magnetic'
 
@@ -34,6 +34,16 @@ export default function Contact() {
         <Magnetic><a className={contactGhostButton} href={`https://github.com/${USER}`} target="_blank" rel="noreferrer">GitHub ↗</a></Magnetic>
       </div>
       <small className="font-mono text-[13px]">{EMAIL}</small>
+      <div className="grid gap-6 border-t border-white/30 pt-6 text-[13px] leading-[1.45] md:grid-cols-[1fr_2fr]">
+        <section>
+          <h3 className="mb-1.5 font-semibold">Legal notice (§ 25 MedienG)</h3>
+          <p>Adyan Midzic, {LOCATION}<br />Personal website presenting my work and qualifications.<br />Contact: {EMAIL}</p>
+        </section>
+        <section>
+          <h3 className="mb-1.5 font-semibold">Privacy</h3>
+          <p>{PRIVACY}</p>
+        </section>
+      </div>
     </footer>
   )
 }
