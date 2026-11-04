@@ -33,9 +33,9 @@ export const TECH: Record<string, IconType> = {
 export const HIDDEN_REPOS = [USER, 'Listen', 'FirstVueApp']
 export const MAX_PROJECTS = 6
 
-// Used instead of the GitHub description, for repos that have none there.
-export const DESCRIPTIONS: Record<string, string> = {
-  Portfolio: 'This website. An animated portfolio with a 3D hero, smooth scrolling and live project data from the GitHub API.',
+// Real screenshots of a project, shown instead of the data panel on its card.
+export const SHOTS: Record<string, string> = {
+  Portfolio: 'assets/projects/portfolio.webp',
 }
 
 // GitHub only reports one main language per repo, so the full stack is listed here.
@@ -47,7 +47,7 @@ export const STACKS: Record<string, string[]> = {
 }
 
 const fallback = (name: string, description: string, language: string) =>
-  ({ name, description, language, fork: false, stargazers_count: 0, pushed_at: '' })
+  ({ name, description, language, fork: false, homepage: null, pushed_at: '' })
 
 // Shown only when the GitHub API can't be reached or the rate limit is used up.
 export const FALLBACK_REPOS = [
@@ -81,6 +81,16 @@ const en = {
   workTitle: 'Things I built to understand how they work.',
   keepScrolling: 'Keep scrolling →',
   viewOnGithub: 'View on GitHub',
+  liveDemo: 'Live demo',
+  projects: {
+    Portfolio: 'Built a WebGL hero with a custom shader, scroll-driven animations and live GitHub data, in English and German.',
+    'Expense-Tracker': 'Built it end to end: JWT login with hashed passwords, payment and category management, and a Docker Compose setup connecting Next.js, Express and MySQL.',
+    'Java-Socket': 'Wrote an HTTP web server on raw Java sockets, processing requests by hand and without any framework, to learn how the web works underneath.',
+    'PHP-Webserver': 'Parses raw HTTP requests and writes valid HTTP/1.1 responses over native PHP sockets, with my own router and no Nginx or Apache.',
+    'Live-Dashboard': 'Built todo management with optimistic UI updates, so every change feels instant, plus live statistics on total and completed tasks.',
+    'Docker-Starter': 'Containerized a small Node.js and Express API to learn how Docker images and Docker Compose services work together.',
+    'Movies-API-TS': 'Built a REST API and frontend in TypeScript to track a movie watchlist, with watched status and data saved in a JSON file.',
+  } as Record<string, string>,
   experience: 'Experience',
   timeline: [
     { when: 'Jul – Aug 2026', title: 'Software Development Intern', where: 'ELEPHANTS 5 GmbH', text: 'Worked on a project using React, TypeScript, Node.js and MongoDB, and implemented automated tests with Playwright.' },
@@ -128,6 +138,16 @@ const de: typeof en = {
   workTitle: 'Dinge, die ich gebaut habe, um sie zu verstehen.',
   keepScrolling: 'Weiter scrollen →',
   viewOnGithub: 'Auf GitHub ansehen',
+  liveDemo: 'Live-Demo',
+  projects: {
+    Portfolio: 'WebGL-Hero mit eigenem Shader, scrollgesteuerte Animationen und Live-Daten von GitHub, auf Englisch und Deutsch.',
+    'Expense-Tracker': 'Komplett selbst gebaut: JWT-Login mit gehashten Passwörtern, Verwaltung von Zahlungen und Kategorien und ein Docker-Compose-Setup, das Next.js, Express und MySQL verbindet.',
+    'Java-Socket': 'HTTP-Webserver auf reinen Java-Sockets, der Anfragen ohne Framework von Hand verarbeitet, um zu lernen, wie das Web im Kern funktioniert.',
+    'PHP-Webserver': 'Liest rohe HTTP-Anfragen und schreibt gültige HTTP/1.1-Antworten über native PHP-Sockets, mit eigenem Router und ohne Nginx oder Apache.',
+    'Live-Dashboard': 'Todo-Verwaltung mit optimistischen UI-Updates, damit jede Änderung sofort wirkt, dazu Live-Statistiken zu allen und erledigten Aufgaben.',
+    'Docker-Starter': 'Kleine Node.js- und Express-API in Containern, um zu lernen, wie Docker-Images und Docker-Compose-Services zusammenspielen.',
+    'Movies-API-TS': 'REST-API und Frontend in TypeScript für eine Film-Watchlist, mit Gesehen-Status und Speicherung in einer JSON-Datei.',
+  },
   experience: 'Erfahrung',
   timeline: [
     { when: 'Juli – Aug. 2026', title: 'Praktikum Softwareentwicklung', where: 'ELEPHANTS 5 GmbH', text: 'Mitarbeit an einem Projekt mit React, TypeScript, Node.js und MongoDB sowie automatisierte Tests mit Playwright.' },

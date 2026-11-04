@@ -1,16 +1,19 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'motion/react'
-import { DESCRIPTIONS, FALLBACK_REPOS, HIDDEN_REPOS, MAX_PROJECTS, STACKS, TECH, USER } from '../data'
+import { FALLBACK_REPOS, HIDDEN_REPOS, MAX_PROJECTS, SHOTS, STACKS, TECH, USER } from '../data'
 import { ago, useLang, type Repo } from '../lib'
 import { eyebrow, section } from '../ui'
 
 // Real repo data from the GitHub API, shown as a small JSON response.
 function RepoPreview({ repo, wide }: { repo: Repo; wide: boolean }) {
   const { lang } = useLang()
+  const shot = SHOTS[repo.name]
+  if (shot) {
+    return <img className={`mb-2 min-h-[110px] w-full overflow-hidden rounded-xl border border-line object-cover object-top ${wide ? 'flex-1' : 'h-40 flex-none'}`} src={`${import.meta.env.BASE_URL}${shot}`} alt="" width={800} height={600} loading="lazy" />
+  }
   const lines = [
     '{',
-    `  "language": "${repo.language ?? 'n/a'}",`,
-    `  "stars": ${repo.stargazers_count},`,
+    `  "language": "${repo.language ?? 'n/a'}"${repo.pushed_at ? ',' : ''}`,
     ...(repo.pushed_at ? [`  "updated": "${ago(repo.pushed_at, lang)}"`] : []),
     '}',
   ]
@@ -45,11 +48,8 @@ function Card({ repo, i, wide }: { repo: Repo; i: number; wide: boolean }) {
   const rotateY = useSpring(useTransform(mx, [0, 1], [-7, 7]), { stiffness: 200, damping: 20 })
   const stack = STACKS[repo.name] ?? (repo.language ? [repo.language] : [])
   return (
-    <motion.a
-      className={`group flex flex-col gap-2.5 rounded-[20px] border border-line bg-white p-[22px] transition-[border-color,box-shadow] duration-250 hover:border-accent hover:shadow-[0_18px_50px_rgba(178,3,55,.13)] ${wide ? 'h-[min(68vh,560px)] w-[clamp(330px,30vw,450px)]' : 'w-full'}`}
-      href={`https://github.com/${USER}/${repo.name}`}
-      target="_blank"
-      rel="noreferrer"
+    <motion.div
+      className={`group relative flex flex-col gap-2.5 rounded-[20px] border border-line bg-white p-[22px] transition-[border-color,box-shadow] duration-250 hover:border-accent hover:shadow-[0_18px_50px_rgba(178,3,55,.13)] ${wide ? 'h-[min(68vh,560px)] w-[clamp(330px,30vw,450px)]' : 'w-full'}`}
       style={{ rotateX, rotateY, transformPerspective: 1100 }}
       onPointerMove={(e) => {
         const r = e.currentTarget.getBoundingClientRect()
@@ -66,8 +66,11 @@ function Card({ repo, i, wide }: { repo: Repo; i: number; wide: boolean }) {
       <h3 className="text-[clamp(26px,2.4vw,36px)] leading-[1.05] font-bold tracking-[-.03em]">{repo.name.replace(/-/g, ' ')}</h3>
       <p className="line-clamp-5 text-[15px] leading-[1.35] text-body">{repo.description}</p>
       <div className="flex flex-wrap items-center gap-1.5">{stack.map((s) => <Chip key={s} name={s} />)}</div>
-      <small className="font-mono text-[12px] text-muted">{t.viewOnGithub}</small>
-    </motion.a>
+      <div className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-[12px] text-muted">
+        <a className="after:absolute after:inset-0" href={`https://github.com/${USER}/${repo.name}`} target="_blank" rel="noreferrer">{t.viewOnGithub}</a>
+        {repo.homepage?.startsWith('http') && <a className="relative z-1 font-medium text-accent underline" href={repo.homepage} target="_blank" rel="noreferrer">{t.liveDemo} ↗</a>}
+      </div>
+    </motion.div>
   )
 }
 
@@ -85,11 +88,11 @@ export default function Work({ repos, horizontal }: { repos: Repo[]; horizontal:
   }, [horizontal])
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const x = useTransform(scrollYProgress, [0, 1], [0, -dist])
-  const live = repos
-    .map((r) => ({ ...r, description: DESCRIPTIONS[r.name] ?? r.description }))
+  const cards = (repos.length ? repos : FALLBACK_REPOS)
+    .map((r) => ({ ...r, description: t.projects[r.name] ?? r.description }))
     .filter((r) => !r.fork && r.description && !HIDDEN_REPOS.includes(r.name))
     .slice(0, MAX_PROJECTS)
-  const cards = (live.length ? live : FALLBACK_REPOS).map((r, i) => <Card key={r.name} repo={r} i={i} wide={horizontal} />)
+    .map((r, i) => <Card key={r.name} repo={r} i={i} wide={horizontal} />)
   if (!horizontal) {
     return <section id="work" className={`${section} bg-panel`}><h2 className={eyebrow}>{t.work}</h2><div className="grid gap-[18px]">{cards}</div></section>
   }
