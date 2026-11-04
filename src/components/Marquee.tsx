@@ -8,10 +8,10 @@ export default function Marquee() {
   const velocity = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 300 })
   const skewX = useTransform(velocity, [-2500, 2500], [-12, 12], { clamp: true })
   return (
-    <div className="marquee" role="img" aria-label={`Tech stack: ${Object.keys(TECH).join(', ')}`}>
+    <div className="overflow-hidden border-y border-line bg-panel py-6" role="img" aria-label={`Tech stack: ${Object.keys(TECH).join(', ')}`}>
       <motion.div style={{ skewX }}>
-        <motion.div className="track" aria-hidden animate={{ x: ['0%', '-50%'] }} transition={{ duration: 34, ease: 'linear', repeat: Infinity }}>
-          {[...entries, ...entries].map(([name, Icon], i) => <span key={i} title={name}><Icon /></span>)}
+        <motion.div className="flex w-max text-[clamp(38px,4.6vw,64px)]" aria-hidden animate={{ x: ['0%', '-50%'] }} transition={{ duration: 34, ease: 'linear', repeat: Infinity }}>
+          {[...entries, ...entries].map(([name, Icon], i) => <span className="mx-[clamp(26px,3.4vw,50px)] inline-flex" key={i} title={name}><Icon /></span>)}
         </motion.div>
       </motion.div>
     </div>
