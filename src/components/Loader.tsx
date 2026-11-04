@@ -9,8 +9,13 @@ export default function Loader({ onDone }: { onDone: () => void }) {
     return () => c.stop()
   }, [onDone])
   return (
-    <motion.div className="loader" exit={{ y: '-100%' }} transition={{ duration: 0.8, ease }}>
-      <span>Adyan Midzic</span><b>{n}</b>
+    <motion.div
+      className="fixed inset-0 z-50 flex items-end justify-between bg-accent p-gut text-[clamp(22px,3vw,40px)] font-bold text-white"
+      exit={{ y: '-100%' }}
+      transition={{ duration: 0.8, ease }}
+    >
+      <span>Adyan Midzic</span>
+      <b className="text-[clamp(90px,22vw,320px)] leading-[.8] font-extrabold tracking-[-.05em] tabular-nums">{n}</b>
     </motion.div>
   )
 }

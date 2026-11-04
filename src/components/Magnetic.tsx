@@ -6,7 +6,7 @@ export default function Magnetic({ children }: { children: ReactNode }) {
   const sx = useSpring(x, { stiffness: 220, damping: 16 }), sy = useSpring(y, { stiffness: 220, damping: 16 })
   return (
     <motion.span
-      className="magnetic"
+      className="inline-block"
       style={{ x: sx, y: sy }}
       onPointerMove={(e) => {
         const r = e.currentTarget.getBoundingClientRect()

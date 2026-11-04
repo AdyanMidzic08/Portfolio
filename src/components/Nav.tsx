@@ -17,14 +17,25 @@ export default function Nav() {
   }, [])
   return (
     <>
-      <motion.div className="progress" style={{ scaleX }} />
-      <nav className="nav" aria-label="Main">
-        <button className="logo" onClick={() => go('top')} aria-label="Back to top">AM</button>
-        <div className="links">
+      <motion.div className="fixed inset-x-0 top-0 z-30 h-[3px] origin-left bg-accent" style={{ scaleX }} />
+      <nav className="pointer-events-none fixed top-[18px] right-gut left-gut z-20 flex items-center justify-between" aria-label="Main">
+        <button
+          className="pointer-events-auto size-11 rounded-full border border-line bg-white/82 font-mono text-[14px] font-bold backdrop-blur-[14px]"
+          onClick={() => go('top')}
+          aria-label="Back to top"
+        >
+          AM
+        </button>
+        <div className="pointer-events-auto flex rounded-full border border-line bg-white/82 p-1 backdrop-blur-[14px]">
           {NAV.map((id) => (
-            <button key={id} onClick={() => go(id)} aria-current={active === id ? 'true' : undefined}>
-              {active === id && <motion.i layoutId="navpill" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
-              <span>{id === 'cv' ? 'CV' : id[0].toUpperCase() + id.slice(1)}</span>
+            <button
+              key={id}
+              className="relative rounded-full px-[9px] py-[7px] text-[12.5px] text-body transition-colors duration-200 hover:text-accent aria-[current=true]:text-white aria-[current=true]:hover:text-white md:px-[15px] md:py-2 md:text-[14px]"
+              onClick={() => go(id)}
+              aria-current={active === id ? 'true' : undefined}
+            >
+              {active === id && <motion.i className="absolute inset-0 rounded-full bg-accent" layoutId="navpill" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
+              <span className="relative">{id === 'cv' ? 'CV' : id[0].toUpperCase() + id.slice(1)}</span>
             </button>
           ))}
         </div>
