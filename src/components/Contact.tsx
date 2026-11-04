@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react'
 import { EMAIL, USER } from '../data'
+import { contactButton, contactGhostButton, cta } from '../ui'
 import Magnetic from './Magnetic'
 
 export default function Contact() {
@@ -18,21 +19,21 @@ export default function Contact() {
     }
   }
   return (
-    <footer id="contact" className="contact" ref={ref}>
-      <motion.h2 style={{ scale }}>Let's build<br />something.</motion.h2>
-      <p>Hiring for web or software development? I'd love to hear about your team.</p>
-      <div className="cta">
-        <Magnetic><a className="btn big" href={`mailto:${EMAIL}?subject=Hello%20Adyan`}>Email me</a></Magnetic>
-        <button className="btn ghost big" onClick={copy}>
+    <footer id="contact" className="flex min-h-svh flex-col justify-end gap-6 overflow-hidden bg-accent px-gut pt-[110px] pb-[34px] text-white [&_:focus-visible]:outline-white" ref={ref}>
+      <motion.h2 className="origin-bottom-left text-[clamp(66px,15.4vw,270px)] leading-[.84] font-extrabold tracking-[-.055em]" style={{ scale }}>Let's build<br />something.</motion.h2>
+      <p className="max-w-[32ch] text-[clamp(19px,2vw,28px)] leading-[1.2]">Hiring for web or software development? I'd love to hear about your team.</p>
+      <div className={cta}>
+        <Magnetic><a className={contactButton} href={`mailto:${EMAIL}?subject=Hello%20Adyan`}>Email me</a></Magnetic>
+        <button className={contactGhostButton} onClick={copy}>
           <AnimatePresence mode="wait">
-            <motion.span key={String(copied)} initial={{ y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -12, opacity: 0 }} transition={{ duration: 0.18 }}>
+            <motion.span className="inline-block" key={String(copied)} initial={{ y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -12, opacity: 0 }} transition={{ duration: 0.18 }}>
               {copied ? 'Copied ✓' : 'Copy address'}
             </motion.span>
           </AnimatePresence>
         </button>
-        <Magnetic><a className="btn ghost big" href={`https://github.com/${USER}`} target="_blank" rel="noreferrer">GitHub ↗</a></Magnetic>
+        <Magnetic><a className={contactGhostButton} href={`https://github.com/${USER}`} target="_blank" rel="noreferrer">GitHub ↗</a></Magnetic>
       </div>
-      <small>{EMAIL}</small>
+      <small className="font-mono text-[13px]">{EMAIL}</small>
     </footer>
   )
 }
