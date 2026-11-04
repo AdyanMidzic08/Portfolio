@@ -16,7 +16,7 @@ export default function Experience() {
           <motion.article className="min-w-0" key={item.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-15%' }} transition={{ duration: 0.8, ease }}>
             <span className="font-mono text-[13px] text-muted">{item.when}</span>
             <h3 className="mt-2.5 text-[clamp(32px,5vw,76px)] leading-none font-bold tracking-[-.04em] wrap-break-word hyphens-auto">{item.title}</h3>
-            <h4 className="mt-2 text-[clamp(19px,2vw,28px)] font-medium text-accent">{item.where}</h4>
+            <h4 className="mt-2 text-[clamp(19px,2vw,28px)] font-medium text-accent-text">{item.where}</h4>
             <p className="mt-3.5 max-w-[54ch] text-[18px] leading-[1.4] text-body">{item.text}</p>
           </motion.article>
         ))}

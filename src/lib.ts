@@ -11,6 +11,17 @@ export function useLang() {
   return { lang, setLang, t: TEXT[lang] }
 }
 
+// index.html sets the initial theme. Returns the new state.
+export function toggleDark() {
+  const dark = document.documentElement.classList.toggle('dark')
+  try {
+    localStorage.setItem('theme', dark ? 'dark' : 'light')
+  } catch {
+    // Storage can be blocked; the choice then lasts until reload.
+  }
+  return dark
+}
+
 let lenis: Lenis | null = null
 
 export function startSmoothScroll() {

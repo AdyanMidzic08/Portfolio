@@ -17,7 +17,7 @@ function Count({ to }: { to: number }) {
     const c = animate(0, to, { duration: 1.2, ease, onUpdate: (v) => setN(Math.round(v)) })
     return () => c.stop()
   }, [inView, to])
-  return <b className="block text-[clamp(54px,7vw,110px)] leading-none font-extrabold tracking-[-.05em] text-accent tabular-nums" ref={ref}>{n}</b>
+  return <b className="block text-[clamp(54px,7vw,110px)] leading-none font-extrabold tracking-[-.05em] text-accent-text tabular-nums" ref={ref}>{n}</b>
 }
 
 function Fact({ to, label }: { to: number; label: string }) {

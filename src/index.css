@@ -2,13 +2,18 @@
 @import '@fontsource-variable/bricolage-grotesque';
 @import '@fontsource-variable/jetbrains-mono';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Colors taken from the CV PDF */
 @theme {
   --color-ink: #0a0a0a;
+  --color-night: #0a0a0a; /* stays dark in both themes, for use on the crimson footer */
+  --color-surface: #fff;
   --color-body: #3f4752;
   --color-muted: #5f6875;
   --color-panel: #f5f8fa;
-  --color-accent: #b20337;
+  --color-accent: #b20337; /* fills, paired with white text */
+  --color-accent-text: #b20337; /* text, icons and outlines on the page background */
   --color-line: rgba(10, 10, 10, .13);
   --font-display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
@@ -23,7 +28,17 @@
 }
 
 @layer base {
-  html { line-height: normal; background: var(--color-white); color: var(--color-ink); font-family: var(--font-display); -webkit-font-smoothing: antialiased; }
+  html.dark {
+    color-scheme: dark;
+    --color-ink: #f2f3f5;
+    --color-surface: #0e0f12;
+    --color-body: #b9c0cb;
+    --color-muted: #939ca9;
+    --color-panel: #16181d;
+    --color-accent-text: #ff5c85;
+    --color-line: rgba(255, 255, 255, .15);
+  }
+  html { line-height: normal; background: var(--color-surface); color: var(--color-ink); font-family: var(--font-display); -webkit-font-smoothing: antialiased; }
   html.lenis, html.lenis body { height: auto; }
   .lenis.lenis-smooth { scroll-behavior: auto !important; }
   body { overflow-x: clip; }
@@ -31,6 +46,6 @@
   html.custom-cursor, html.custom-cursor * { cursor: none !important; }
   /* An iframe swallows pointer events, which would freeze the custom cursor at its edge. */
   html.custom-cursor iframe { pointer-events: none; }
-  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--color-accent-text); outline-offset: 3px; }
   ::selection { background: var(--color-accent); color: var(--color-white); }
 }

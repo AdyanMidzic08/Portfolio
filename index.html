@@ -5,6 +5,12 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adyan Midzic | Web &amp; Software Developer</title>
+    <script>
+      // Runs before first paint so dark-mode visitors never see a white flash.
+      let theme
+      try { theme = localStorage.getItem('theme') } catch { /* storage blocked: follow the system */ }
+      document.documentElement.classList.toggle('dark', theme ? theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches)
+    </script>
   </head>
   <body>
     <div id="root"></div>

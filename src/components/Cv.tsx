@@ -11,11 +11,11 @@ export default function Cv() {
         <div className="flex flex-col gap-7 md:sticky md:top-[100px]">
           <h3 className="text-[clamp(36px,5.4vw,84px)] leading-none font-bold tracking-[-.04em]">{t.cvTitle[0]}<br />{t.cvTitle[1]}</h3>
           <div className="flex flex-wrap gap-2.5">
-            <div className="flex rounded-full border border-line bg-white p-1" role="group" aria-label={t.cvLanguage}>
+            <div className="flex rounded-full border border-line bg-surface p-1" role="group" aria-label={t.cvLanguage}>
               {(['en', 'de'] as const).map((l) => (
                 <button
                   key={l}
-                  className="relative rounded-full px-[18px] py-[9px] text-[15px] font-semibold transition-colors duration-200 aria-pressed:text-white"
+                  className="relative rounded-full px-[18px] py-[9px] text-[15px] font-semibold transition-colors duration-200 aria-pressed:text-surface"
                   onClick={() => setLang(l)}
                   aria-pressed={lang === l}
                 >
