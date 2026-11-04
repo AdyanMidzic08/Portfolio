@@ -5,6 +5,7 @@ import Loader from './components/Loader'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
+import About from './components/About'
 
 export default function App() {
   const still = useReducedMotion() ?? false
@@ -22,6 +23,7 @@ export default function App() {
       <main>
         <Hero ready={ready} repos={repos} still={still} />
         <Marquee />
+        <About repos={repos} />
       </main>
     </MotionConfig>
   )
