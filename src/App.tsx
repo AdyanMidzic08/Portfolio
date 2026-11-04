@@ -11,6 +11,7 @@ import Work from './components/Work'
 import Experience from './components/Experience'
 import Cv from './components/Cv'
 import Contact from './components/Contact'
+import Cursor from './components/Cursor'
 
 export default function App() {
   const still = useReducedMotion() ?? false
@@ -41,6 +42,7 @@ export default function App() {
           <Cv />
         </main>
         <Contact />
+        <Cursor />
       </MotionConfig>
     </LangContext>
   )
