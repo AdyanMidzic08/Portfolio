@@ -1,8 +1,15 @@
-import { useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import Lenis from 'lenis'
-import { USER } from './data'
+import { TEXT, USER, type Lang } from './data'
 
 export const ease = [0.16, 1, 0.3, 1] as const
+
+export const LangContext = createContext<{ lang: Lang; setLang: (lang: Lang) => void }>({ lang: 'en', setLang: () => {} })
+
+export function useLang() {
+  const { lang, setLang } = useContext(LangContext)
+  return { lang, setLang, t: TEXT[lang] }
+}
 
 let lenis: Lenis | null = null
 
@@ -50,9 +57,9 @@ export function useGithub() {
   return repos
 }
 
-export function ago(iso: string) {
+export function ago(iso: string, lang: Lang) {
   const days = Math.round((Date.now() - new Date(iso).getTime()) / 864e5)
-  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
+  const rtf = new Intl.RelativeTimeFormat(lang, { numeric: 'auto' })
   return days < 30 ? rtf.format(-days, 'day') : rtf.format(-Math.round(days / 30), 'month')
 }
 

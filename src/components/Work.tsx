@@ -1,16 +1,17 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'motion/react'
 import { DESCRIPTIONS, FALLBACK_REPOS, HIDDEN_REPOS, MAX_PROJECTS, STACKS, TECH, USER } from '../data'
-import { ago, type Repo } from '../lib'
+import { ago, useLang, type Repo } from '../lib'
 import { eyebrow, section } from '../ui'
 
 // Real repo data from the GitHub API, shown as a small JSON response.
 function RepoPreview({ repo, wide }: { repo: Repo; wide: boolean }) {
+  const { lang } = useLang()
   const lines = [
     '{',
     `  "language": "${repo.language ?? 'n/a'}",`,
     `  "stars": ${repo.stargazers_count},`,
-    ...(repo.pushed_at ? [`  "updated": "${ago(repo.pushed_at)}"`] : []),
+    ...(repo.pushed_at ? [`  "updated": "${ago(repo.pushed_at, lang)}"`] : []),
     '}',
   ]
   return (
@@ -38,6 +39,7 @@ function Chip({ name }: { name: string }) {
 }
 
 function Card({ repo, i, wide }: { repo: Repo; i: number; wide: boolean }) {
+  const { t } = useLang()
   const mx = useMotionValue(0.5), my = useMotionValue(0.5)
   const rotateX = useSpring(useTransform(my, [0, 1], [7, -7]), { stiffness: 200, damping: 20 })
   const rotateY = useSpring(useTransform(mx, [0, 1], [-7, 7]), { stiffness: 200, damping: 20 })
@@ -64,12 +66,13 @@ function Card({ repo, i, wide }: { repo: Repo; i: number; wide: boolean }) {
       <h3 className="text-[clamp(26px,2.4vw,36px)] leading-[1.05] font-bold tracking-[-.03em]">{repo.name.replace(/-/g, ' ')}</h3>
       <p className="line-clamp-5 text-[15px] leading-[1.35] text-body">{repo.description}</p>
       <div className="flex flex-wrap items-center gap-1.5">{stack.map((s) => <Chip key={s} name={s} />)}</div>
-      <small className="font-mono text-[12px] text-muted">View on GitHub</small>
+      <small className="font-mono text-[12px] text-muted">{t.viewOnGithub}</small>
     </motion.a>
   )
 }
 
 export default function Work({ repos, horizontal }: { repos: Repo[]; horizontal: boolean }) {
+  const { t } = useLang()
   const ref = useRef<HTMLElement>(null)
   const track = useRef<HTMLDivElement>(null)
   const [dist, setDist] = useState(0)
@@ -88,16 +91,16 @@ export default function Work({ repos, horizontal }: { repos: Repo[]; horizontal:
     .slice(0, MAX_PROJECTS)
   const cards = (live.length ? live : FALLBACK_REPOS).map((r, i) => <Card key={r.name} repo={r} i={i} wide={horizontal} />)
   if (!horizontal) {
-    return <section id="work" className={`${section} bg-panel`}><h2 className={eyebrow}>Selected work</h2><div className="grid gap-[18px]">{cards}</div></section>
+    return <section id="work" className={`${section} bg-panel`}><h2 className={eyebrow}>{t.work}</h2><div className="grid gap-[18px]">{cards}</div></section>
   }
   return (
     <section id="work" className="bg-panel" ref={ref} style={{ height: `calc(100vh + ${dist}px)` }}>
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div className="flex w-max items-stretch gap-[22px] px-gut pt-[70px] pb-5" ref={track} style={{ x }}>
           <div className="flex w-[33vw] min-w-[340px] flex-col justify-center pr-5">
-            <h2 className={eyebrow}>Selected work</h2>
-            <p className="text-[clamp(36px,4.6vw,72px)] leading-none font-bold tracking-[-.04em]">Things I built to understand how they work.</p>
-            <span className="mt-[26px] font-mono text-[13px] text-muted">Keep scrolling →</span>
+            <h2 className={eyebrow}>{t.work}</h2>
+            <p className="text-[clamp(36px,4.6vw,72px)] leading-none font-bold tracking-[-.04em]">{t.workTitle}</p>
+            <span className="mt-[26px] font-mono text-[13px] text-muted">{t.keepScrolling}</span>
           </div>
           {cards}
         </motion.div>

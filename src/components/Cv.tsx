@@ -1,18 +1,17 @@
-import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { ease } from '../lib'
+import { ease, useLang } from '../lib'
 import { eyebrow, primaryButton, section } from '../ui'
 
 export default function Cv() {
-  const [lang, setLang] = useState<'en' | 'de'>('en')
+  const { lang, setLang, t } = useLang()
   return (
     <section id="cv" className={`${section} bg-panel`}>
-      <h2 className={eyebrow}>CV</h2>
+      <h2 className={eyebrow}>{t.cv}</h2>
       <div className="grid grid-cols-1 items-start gap-[clamp(28px,5vw,70px)] md:grid-cols-[1fr_minmax(0,620px)]">
         <div className="flex flex-col gap-7 md:sticky md:top-[100px]">
-          <h3 className="text-[clamp(36px,5.4vw,84px)] leading-none font-bold tracking-[-.04em]">My full résumé,<br />in your language.</h3>
+          <h3 className="text-[clamp(36px,5.4vw,84px)] leading-none font-bold tracking-[-.04em]">{t.cvTitle[0]}<br />{t.cvTitle[1]}</h3>
           <div className="flex flex-wrap gap-2.5">
-            <div className="flex rounded-full border border-line bg-white p-1" role="group" aria-label="CV language">
+            <div className="flex rounded-full border border-line bg-white p-1" role="group" aria-label={t.cvLanguage}>
               {(['en', 'de'] as const).map((l) => (
                 <button
                   key={l}
@@ -25,7 +24,7 @@ export default function Cv() {
                 </button>
               ))}
             </div>
-            <a className={primaryButton} href={`/cv/${lang}.pdf`} download={`Adyan_Midzic_CV_${lang.toUpperCase()}.pdf`}>Download PDF</a>
+            <a className={primaryButton} href={`${import.meta.env.BASE_URL}cv/${lang}.pdf`} download={`Adyan_Midzic_CV_${lang.toUpperCase()}.pdf`}>{t.download}</a>
           </div>
         </div>
         <div>
@@ -38,13 +37,11 @@ export default function Cv() {
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.45, ease }}
             >
-              <iframe className="size-full border-0" src={`/cv/${lang}.pdf#view=FitH&toolbar=0`} title={lang === 'en' ? 'CV in English' : 'Lebenslauf auf Deutsch'} />
+              <iframe className="size-full border-0" src={`${import.meta.env.BASE_URL}cv/${lang}.pdf#view=FitH&toolbar=0`} title={lang === 'en' ? 'CV in English' : 'Lebenslauf auf Deutsch'} />
             </motion.div>
           </AnimatePresence>
           <p className="mt-4 text-[14px] leading-[1.4] text-muted">
-            {lang === 'en'
-              ? 'For security reasons, my phone number and home address have been removed from this public version.'
-              : 'Aus Sicherheitsgründen wurden meine Telefonnummer und Adresse aus dieser öffentlichen Version entfernt.'}
+            {t.cvNote}
           </p>
         </div>
       </div>
