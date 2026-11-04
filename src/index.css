@@ -28,6 +28,9 @@
   .lenis.lenis-smooth { scroll-behavior: auto !important; }
   body { overflow-x: clip; }
   button { cursor: pointer; }
+  html.custom-cursor, html.custom-cursor * { cursor: none !important; }
+  /* An iframe swallows pointer events, which would freeze the custom cursor at its edge. */
+  html.custom-cursor iframe { pointer-events: none; }
   :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
   ::selection { background: var(--color-accent); color: var(--color-white); }
 }
