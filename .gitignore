@@ -23,5 +23,3 @@ dist-ssr
 *.sln
 *.sw?
 
-# CV PDFs contain a phone number and home address; do not commit them.
-public/cv
