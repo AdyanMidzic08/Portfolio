@@ -39,7 +39,7 @@ export type Repo = {
   description: string | null
   language: string | null
   fork: boolean
-  stargazers_count: number
+  homepage: string | null
   pushed_at: string
 }
 
