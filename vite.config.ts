@@ -5,6 +5,8 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // GitHub Pages serves the site from /Portfolio/; use '/' once it has its own domain.
+  base: '/Portfolio/',
   plugins: [
     tailwindcss(),
     react(),
