@@ -137,3 +137,14 @@ h1 { display: flex; flex-direction: column; font-size: clamp(82px, min(21.5vw, 3
   .cv-grid { grid-template-columns: 1fr; }
   .cv-head { position: static; }
 }
+
+/* Contact */
+.contact { min-height: 100svh; background: var(--accent); color: var(--white); padding: 110px var(--gut) 34px; display: flex; flex-direction: column; justify-content: flex-end; gap: 24px; overflow: hidden; }
+.contact :focus-visible { outline-color: var(--white); }
+.contact h2 { font-size: clamp(66px, 15.4vw, 270px); line-height: .84; letter-spacing: -.055em; font-weight: 800; transform-origin: left bottom; }
+.contact p { font-size: clamp(19px, 2vw, 28px); max-width: 32ch; line-height: 1.2; }
+.contact .btn { background: var(--ink); border-color: var(--ink); color: var(--white); }
+.contact .btn:hover { background: var(--white); border-color: var(--white); color: var(--ink); }
+.contact .btn.ghost { background: transparent; border-color: rgba(255, 255, 255, .7); color: var(--white); backdrop-filter: none; }
+.contact .btn.ghost:hover { background: var(--white); color: var(--ink); }
+.contact small { font-family: var(--mono); font-size: 13px; }

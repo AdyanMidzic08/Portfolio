@@ -9,6 +9,7 @@ import About from './components/About'
 import Work from './components/Work'
 import Experience from './components/Experience'
 import Cv from './components/Cv'
+import Contact from './components/Contact'
 
 export default function App() {
   const still = useReducedMotion() ?? false
@@ -32,6 +33,7 @@ export default function App() {
         <Experience />
         <Cv />
       </main>
+      <Contact />
     </MotionConfig>
   )
 }
