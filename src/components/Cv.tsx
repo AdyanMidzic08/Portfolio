@@ -28,18 +28,25 @@ export default function Cv() {
             <a className={primaryButton} href={`/cv/${lang}.pdf`} download={`Adyan_Midzic_CV_${lang.toUpperCase()}.pdf`}>Download PDF</a>
           </div>
         </div>
-        <AnimatePresence mode="wait">
-          <motion.div
-            className="aspect-[1/1.414] origin-top overflow-hidden rounded-[18px] border border-line bg-white shadow-[0_24px_70px_rgba(10,10,10,.1)]"
-            key={lang}
-            initial={{ opacity: 0, y: 24, rotateX: -6 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.45, ease }}
-          >
-            <iframe className="size-full border-0" src={`/cv/${lang}.pdf#view=FitH&toolbar=0`} title={lang === 'en' ? 'CV in English' : 'Lebenslauf auf Deutsch'} />
-          </motion.div>
-        </AnimatePresence>
+        <div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              className="aspect-[1/1.414] origin-top overflow-hidden rounded-[18px] border border-line bg-white shadow-[0_24px_70px_rgba(10,10,10,.1)]"
+              key={lang}
+              initial={{ opacity: 0, y: 24, rotateX: -6 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.45, ease }}
+            >
+              <iframe className="size-full border-0" src={`/cv/${lang}.pdf#view=FitH&toolbar=0`} title={lang === 'en' ? 'CV in English' : 'Lebenslauf auf Deutsch'} />
+            </motion.div>
+          </AnimatePresence>
+          <p className="mt-4 text-[14px] leading-[1.4] text-muted">
+            {lang === 'en'
+              ? 'For security reasons, my phone number and home address have been removed from this public version.'
+              : 'Aus Sicherheitsgründen wurden meine Telefonnummer und Adresse aus dieser öffentlichen Version entfernt.'}
+          </p>
+        </div>
       </div>
     </section>
   )
