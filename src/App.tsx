@@ -4,6 +4,7 @@ import { startSmoothScroll, useGithub } from './lib'
 import Loader from './components/Loader'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+import Marquee from './components/Marquee'
 
 export default function App() {
   const still = useReducedMotion() ?? false
@@ -20,6 +21,7 @@ export default function App() {
       <Nav />
       <main>
         <Hero ready={ready} repos={repos} still={still} />
+        <Marquee />
       </main>
     </MotionConfig>
   )
