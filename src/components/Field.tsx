@@ -17,12 +17,15 @@ const vertexShader = /* glsl */ `
     gl_Position = projectionMatrix * mv;
   }`
 
-// Colors from the CV: pale tint up to the crimson accent #B20337.
+// Colors from the CV: pale tint up to the crimson accent #B20337. On dark: deep crimson up to a bright pink.
 const fragmentShader = /* glsl */ `
+  uniform float dark;
   varying float h; varying float fade;
   void main() {
     if (length(gl_PointCoord - .5) > .5) discard;
-    gl_FragColor = vec4(mix(vec3(.91, .66, .74), vec3(.7, .012, .216), h), fade * (.35 + h * .65));
+    vec3 low = mix(vec3(.91, .66, .74), vec3(.36, .03, .13), dark);
+    vec3 high = mix(vec3(.7, .012, .216), vec3(1., .36, .52), dark);
+    gl_FragColor = vec4(mix(low, high, h), fade * (.35 + h * .65));
   }`
 
 const COLS = 190, ROWS = 110
@@ -32,7 +35,12 @@ for (let i = 0; i < COLS * ROWS; i++) {
   positions[i * 3 + 2] = (Math.floor(i / COLS) / ROWS) * 26 - 19
 }
 const geometry = new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(positions, 3))
-const uniforms = { t: { value: 0 }, m: { value: new THREE.Vector2(0, 40) }, px: { value: 1 } }
+const uniforms = {
+  t: { value: 0 },
+  m: { value: new THREE.Vector2(0, 40) },
+  px: { value: 1 },
+  dark: { value: document.documentElement.classList.contains('dark') ? 1 : 0 },
+}
 const ray = new THREE.Raycaster()
 const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 2.6)
 const hit = new THREE.Vector3()
@@ -42,6 +50,7 @@ function Wave() {
   useFrame(({ clock, pointer, camera, viewport }) => {
     uniforms.t.value = clock.elapsedTime
     uniforms.px.value = viewport.dpr
+    uniforms.dark.value += (+document.documentElement.classList.contains('dark') - uniforms.dark.value) * 0.08
     ray.setFromCamera(pointer, camera)
     if (ray.ray.intersectPlane(plane, hit)) uniforms.m.value.lerp(target.set(hit.x, hit.z), 0.07)
   })

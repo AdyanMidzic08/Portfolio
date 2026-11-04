@@ -71,6 +71,8 @@ const en = {
   backToTop: 'Back to top',
   switchLang: 'Auf Deutsch umschalten',
   otherLang: 'DE',
+  toDark: 'Switch to dark mode',
+  toLight: 'Switch to light mode',
   techStack: 'Tech stack',
   roles: ['Web Developer', 'Software Engineer', 'Full-Stack Developer'],
   place: 'Leonding, Austria',
@@ -118,7 +120,7 @@ const en = {
   legalPurpose: 'Personal website presenting my work and qualifications.',
   legalContact: 'Contact',
   privacyTitle: 'Privacy',
-  privacy: 'This site sets no cookies and uses no tracking. This site is hosted on GitHub Pages, and your browser loads my project data directly from the GitHub API. In both cases your IP address is sent to GitHub, Inc. (USA), which processes it in technical logs. This rests on my legitimate interest in presenting my work (Art. 6(1)(f) GDPR). If you email me, I use your message only to reply. You have the right to access, rectify, erase and restrict your data and to object, and you can complain to the Austrian Data Protection Authority (dsb.gv.at).',
+  privacy: 'This site sets no cookies and uses no tracking. Your light or dark mode choice is saved only in your own browser. This site is hosted on GitHub Pages, and your browser loads my project data directly from the GitHub API. In both cases your IP address is sent to GitHub, Inc. (USA), which processes it in technical logs. This rests on my legitimate interest in presenting my work (Art. 6(1)(f) GDPR). If you email me, I use your message only to reply. You have the right to access, rectify, erase and restrict your data and to object, and you can complain to the Austrian Data Protection Authority (dsb.gv.at).',
 }
 
 // Typed as `en`, so a missing German text fails the build.
@@ -128,6 +130,8 @@ const de: typeof en = {
   backToTop: 'Nach oben',
   switchLang: 'Switch to English',
   otherLang: 'EN',
+  toDark: 'Zum dunklen Design wechseln',
+  toLight: 'Zum hellen Design wechseln',
   techStack: 'Technologien',
   roles: ['Webentwickler', 'Softwareentwickler', 'Full-Stack-Entwickler'],
   place: 'Leonding, Österreich',
@@ -175,7 +179,7 @@ const de: typeof en = {
   legalPurpose: 'Persönliche Website zur Präsentation meiner Arbeit und Qualifikationen.',
   legalContact: 'Kontakt',
   privacyTitle: 'Datenschutz',
-  privacy: 'Diese Seite setzt keine Cookies und verwendet kein Tracking. Diese Seite wird über GitHub Pages bereitgestellt, und Ihr Browser lädt meine Projektdaten direkt von der GitHub-API. In beiden Fällen wird Ihre IP-Adresse an GitHub, Inc. (USA) übermittelt, die sie in technischen Logs verarbeitet. Dies beruht auf meinem berechtigten Interesse, meine Arbeit zu präsentieren (Art. 6 Abs. 1 lit. f DSGVO). Wenn Sie mir eine E-Mail schreiben, nutze ich Ihre Nachricht nur für die Antwort. Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung und Widerspruch und können sich bei der österreichischen Datenschutzbehörde beschweren (dsb.gv.at).',
+  privacy: 'Diese Seite setzt keine Cookies und verwendet kein Tracking. Ihre Wahl zwischen hellem und dunklem Design wird nur in Ihrem eigenen Browser gespeichert. Diese Seite wird über GitHub Pages bereitgestellt, und Ihr Browser lädt meine Projektdaten direkt von der GitHub-API. In beiden Fällen wird Ihre IP-Adresse an GitHub, Inc. (USA) übermittelt, die sie in technischen Logs verarbeitet. Dies beruht auf meinem berechtigten Interesse, meine Arbeit zu präsentieren (Art. 6 Abs. 1 lit. f DSGVO). Wenn Sie mir eine E-Mail schreiben, nutze ich Ihre Nachricht nur für die Antwort. Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung und Widerspruch und können sich bei der österreichischen Datenschutzbehörde beschweren (dsb.gv.at).',
 }
 
 export const TEXT: Record<Lang, typeof en> = { en, de }

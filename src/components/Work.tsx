@@ -21,7 +21,7 @@ function RepoPreview({ repo, wide }: { repo: Repo; wide: boolean }) {
     <div className={`mb-2 flex min-h-[110px] flex-col justify-center gap-1.5 overflow-hidden rounded-xl border border-line bg-panel p-4 ${wide ? 'flex-1' : 'h-40 flex-none'}`} aria-hidden>
       {lines.map((l, i) => (
         <motion.code
-          className="font-mono text-[clamp(12px,1vw,14.5px)] whitespace-pre text-accent [font-variant-ligatures:none]"
+          className="font-mono text-[clamp(12px,1vw,14.5px)] whitespace-pre text-accent-text [font-variant-ligatures:none]"
           key={i}
           initial={{ opacity: 0, x: -12 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -49,7 +49,7 @@ function Card({ repo, i, wide }: { repo: Repo; i: number; wide: boolean }) {
   const stack = STACKS[repo.name] ?? (repo.language ? [repo.language] : [])
   return (
     <motion.div
-      className={`group relative flex flex-col gap-2.5 rounded-[20px] border border-line bg-white p-[22px] transition-[border-color,box-shadow] duration-250 hover:border-accent hover:shadow-[0_18px_50px_rgba(178,3,55,.13)] ${wide ? 'h-[min(68vh,560px)] w-[clamp(330px,30vw,450px)]' : 'w-full'}`}
+      className={`group relative flex flex-col gap-2.5 rounded-[20px] border border-line bg-surface p-[22px] transition-[border-color,box-shadow] duration-250 hover:border-accent hover:shadow-[0_18px_50px_rgba(178,3,55,.13)] ${wide ? 'h-[min(68vh,560px)] w-[clamp(330px,30vw,450px)]' : 'w-full'}`}
       style={{ rotateX, rotateY, transformPerspective: 1100 }}
       onPointerMove={(e) => {
         const r = e.currentTarget.getBoundingClientRect()
@@ -60,7 +60,7 @@ function Card({ repo, i, wide }: { repo: Repo; i: number; wide: boolean }) {
     >
       <div className="flex justify-between font-mono text-[13px] text-muted">
         <span>0{i + 1}</span>
-        <span className="text-[20px] leading-none text-ink transition-transform duration-250 group-hover:translate-x-[3px] group-hover:-translate-y-[3px] group-hover:text-accent">↗</span>
+        <span className="text-[20px] leading-none text-ink transition-transform duration-250 group-hover:translate-x-[3px] group-hover:-translate-y-[3px] group-hover:text-accent-text">↗</span>
       </div>
       <RepoPreview repo={repo} wide={wide} />
       <h3 className="text-[clamp(26px,2.4vw,36px)] leading-[1.05] font-bold tracking-[-.03em]">{repo.name.replace(/-/g, ' ')}</h3>
@@ -68,7 +68,7 @@ function Card({ repo, i, wide }: { repo: Repo; i: number; wide: boolean }) {
       <div className="flex flex-wrap items-center gap-1.5">{stack.map((s) => <Chip key={s} name={s} />)}</div>
       <div className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-[12px] text-muted">
         <a className="after:absolute after:inset-0" href={`https://github.com/${USER}/${repo.name}`} target="_blank" rel="noreferrer">{t.viewOnGithub}</a>
-        {repo.homepage?.startsWith('http') && <a className="relative z-1 font-medium text-accent underline" href={repo.homepage} target="_blank" rel="noreferrer">{t.liveDemo} ↗</a>}
+        {repo.homepage?.startsWith('http') && <a className="relative z-1 font-medium text-accent-text underline" href={repo.homepage} target="_blank" rel="noreferrer">{t.liveDemo} ↗</a>}
       </div>
     </motion.div>
   )

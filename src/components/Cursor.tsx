@@ -58,7 +58,7 @@ export default function Cursor() {
   if (!enabled) return null
   return (
     <div
-      className={`pointer-events-none fixed inset-0 z-60 transition-[opacity,color] duration-200 ${onAccent && !active ? 'text-white' : 'text-accent'} ${visible ? 'opacity-100' : 'opacity-0'}`}
+      className={`pointer-events-none fixed inset-0 z-60 transition-[opacity,color] duration-200 ${onAccent && !active ? 'text-white' : 'text-accent-text'} ${visible ? 'opacity-100' : 'opacity-0'}`}
       aria-hidden
     >
       {TRAIL.map((dot) => <TrailDot key={dot.size} x={x} y={y} {...dot} />)}
