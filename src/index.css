@@ -112,3 +112,11 @@ h1 { display: flex; flex-direction: column; font-size: clamp(82px, min(21.5vw, 3
 .stack { display: grid; gap: 18px; }
 .stack .card { width: 100%; height: auto; }
 .stack .pv { flex: none; height: 160px; }
+
+/* Experience */
+.timeline { position: relative; padding-left: clamp(28px, 6vw, 90px); display: grid; gap: 70px; border-left: 1px solid var(--line); }
+.timeline > i { position: absolute; left: -2px; top: 0; bottom: 0; width: 3px; background: var(--accent); transform-origin: top; }
+.timeline span { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.timeline h3 { font-size: clamp(32px, 5vw, 76px); letter-spacing: -.04em; line-height: 1; margin-top: 10px; }
+.timeline h4 { font-size: clamp(19px, 2vw, 28px); font-weight: 500; color: var(--accent); margin-top: 8px; }
+.timeline p { color: var(--text); font-size: 18px; max-width: 54ch; margin-top: 14px; line-height: 1.4; }
