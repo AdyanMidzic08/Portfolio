@@ -47,3 +47,27 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 899px) {
   .links button { padding: 7px 9px; font-size: 12.5px; }
 }
+
+/* Hero */
+.hero { position: relative; min-height: 100svh; overflow: hidden; display: flex; }
+.field { position: absolute; inset: 0; }
+.hero::after { content: ''; position: absolute; inset: auto 0 0; height: 22%; background: linear-gradient(transparent, var(--white)); pointer-events: none; }
+.hero-in { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: clamp(14px, 2.4vh, 28px); padding: 96px var(--gut) clamp(24px, 4vh, 44px); pointer-events: none; }
+.hero-in a, .hero-in button, .word { pointer-events: auto; }
+.hero-top { display: flex; justify-content: space-between; font-family: var(--mono); font-size: clamp(12px, 1.2vw, 15px); color: var(--accent); }
+.roles { position: relative; display: inline-flex; overflow: hidden; min-height: 1.5em; }
+.roles span { display: block; }
+h1 { display: flex; flex-direction: column; font-size: clamp(82px, min(21.5vw, 31vh), 400px); line-height: .86; letter-spacing: -.055em; font-weight: 800; }
+.word { display: flex; width: max-content; }
+.clip { display: inline-block; overflow: hidden; letter-spacing: 0; padding: .03em .05em .14em .03em; margin: 0 -.07em -.09em -.03em; }
+.clip > span { display: inline-block; }
+.hero-bottom { display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between; }
+.hero-bottom p { max-width: 36ch; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.25; }
+.live { width: 100%; font-family: var(--mono); font-size: 12.5px; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.live b { color: var(--ink); font-weight: 500; }
+.live i { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 0 rgba(178, 3, 55, .6); animation: pulse 2s infinite; }
+@keyframes pulse { to { box-shadow: 0 0 0 10px rgba(178, 3, 55, 0); } }
+@media (max-width: 899px) {
+  .hero-top > span:last-child { display: none; }
+  .hero-bottom { align-items: flex-start; }
+}

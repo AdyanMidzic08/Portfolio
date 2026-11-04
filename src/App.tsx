@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, MotionConfig, useReducedMotion } from 'motion/react'
-import { startSmoothScroll } from './lib'
+import { startSmoothScroll, useGithub } from './lib'
 import Loader from './components/Loader'
 import Nav from './components/Nav'
+import Hero from './components/Hero'
 
 export default function App() {
   const still = useReducedMotion() ?? false
   const [ready, setReady] = useState(still)
+  const repos = useGithub()
 
   useEffect(() => {
     if (!still) return startSmoothScroll()
@@ -17,6 +19,7 @@ export default function App() {
       <AnimatePresence>{!ready && <Loader onDone={() => setReady(true)} />}</AnimatePresence>
       <Nav />
       <main>
+        <Hero ready={ready} repos={repos} still={still} />
       </main>
     </MotionConfig>
   )
