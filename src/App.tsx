@@ -8,6 +8,7 @@ import Marquee from './components/Marquee'
 import About from './components/About'
 import Work from './components/Work'
 import Experience from './components/Experience'
+import Cv from './components/Cv'
 
 export default function App() {
   const still = useReducedMotion() ?? false
@@ -29,6 +30,7 @@ export default function App() {
         <About repos={repos} />
         <Work repos={repos} horizontal={desktop && !still} />
         <Experience />
+        <Cv />
       </main>
     </MotionConfig>
   )
