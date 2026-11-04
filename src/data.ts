@@ -9,7 +9,7 @@ export const USER = 'AdyanMidzic08'
 export const EMAIL = 'a.midzic2@students.htl-leonding.ac.at'
 export const NAV = ['about', 'work', 'experience', 'cv', 'contact']
 export const ROLES = ['Web Developer', 'Software Engineer', 'Full-Stack Developer']
-export const ABOUT = "Hey, I'm Adyan, a student at HTL Leonding in Austria. TypeScript is my favorite language and React.js my favorite library. I love building for the web, from the database to the final pixel."
+export const ABOUT = "Hey, I'm Adyan, a student at HTL Leonding in Austria. TypeScript is my favorite language and React.js my favorite library. I love coding and turning ideas into things people enjoy using."
 
 // shortcut: Playwright has no icon in react-icons, so it stays out of the stack and appears in the internship text.
 export const TECH: Record<string, IconType> = {
