@@ -2,7 +2,7 @@ import type { IconType } from 'react-icons'
 import { FaJava } from 'react-icons/fa'
 import {
   SiDocker, SiExpress, SiFigma, SiGit, SiJavascript, SiMongodb, SiMysql, SiNextdotjs,
-  SiNodedotjs, SiPhp, SiReact, SiTypescript, SiVuedotjs,
+  SiNodedotjs, SiPhp, SiReact, SiTailwindcss, SiTypescript, SiVuedotjs,
 } from 'react-icons/si'
 
 export const USER = 'AdyanMidzic08'
@@ -20,6 +20,7 @@ export const TECH: Record<string, IconType> = {
   Vue: SiVuedotjs,
   'Node.js': SiNodedotjs,
   Express: SiExpress,
+  'Tailwind CSS': SiTailwindcss,
   Java: FaJava,
   PHP: SiPhp,
   MySQL: SiMysql,
@@ -30,11 +31,17 @@ export const TECH: Record<string, IconType> = {
 }
 
 // Repos that never appear under "Selected work". Forks and repos without a description are skipped automatically.
-export const HIDDEN_REPOS = [USER, 'Portfolio', 'Listen']
+export const HIDDEN_REPOS = [USER, 'Listen', 'FirstVueApp']
 export const MAX_PROJECTS = 6
+
+// Used instead of the GitHub description, for repos that have none there.
+export const DESCRIPTIONS: Record<string, string> = {
+  Portfolio: 'This website. An animated portfolio with a 3D hero, smooth scrolling and live project data from the GitHub API.',
+}
 
 // GitHub only reports one main language per repo, so the full stack is listed here.
 export const STACKS: Record<string, string[]> = {
+  Portfolio: ['React', 'TypeScript', 'Tailwind CSS'],
   'Expense-Tracker': ['Next.js', 'Express', 'MySQL', 'Docker'],
   'Live-Dashboard': ['React', 'TypeScript', 'Express'],
   'Docker-Starter': ['Docker', 'Node.js', 'Express'],

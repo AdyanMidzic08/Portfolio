@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'motion/react'
-import { FALLBACK_REPOS, HIDDEN_REPOS, MAX_PROJECTS, STACKS, TECH, USER } from '../data'
+import { DESCRIPTIONS, FALLBACK_REPOS, HIDDEN_REPOS, MAX_PROJECTS, STACKS, TECH, USER } from '../data'
 import { ago, type Repo } from '../lib'
 import { eyebrow, section } from '../ui'
 
@@ -82,7 +82,10 @@ export default function Work({ repos, horizontal }: { repos: Repo[]; horizontal:
   }, [horizontal])
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const x = useTransform(scrollYProgress, [0, 1], [0, -dist])
-  const live = repos.filter((r) => !r.fork && r.description && !HIDDEN_REPOS.includes(r.name)).slice(0, MAX_PROJECTS)
+  const live = repos
+    .map((r) => ({ ...r, description: DESCRIPTIONS[r.name] ?? r.description }))
+    .filter((r) => !r.fork && r.description && !HIDDEN_REPOS.includes(r.name))
+    .slice(0, MAX_PROJECTS)
   const cards = (live.length ? live : FALLBACK_REPOS).map((r, i) => <Card key={r.name} repo={r} i={i} wide={horizontal} />)
   if (!horizontal) {
     return <section id="work" className={`${section} bg-panel`}><h2 className={eyebrow}>Selected work</h2><div className="grid gap-[18px]">{cards}</div></section>
