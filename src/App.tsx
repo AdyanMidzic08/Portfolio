@@ -17,7 +17,7 @@ export default function App() {
   const desktop = useDesktop()
   const [ready, setReady] = useState(still)
   const repos = useGithub()
-  const [lang, setLang] = useState<Lang>('en')
+  const [lang, setLang] = useState<Lang>(() => (navigator.language.toLowerCase().startsWith('de') ? 'de' : 'en'))
 
   useEffect(() => {
     if (!still) return startSmoothScroll()
