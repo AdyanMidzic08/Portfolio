@@ -27,9 +27,16 @@ export function go(id: string) {
   else el.scrollIntoView()
 }
 
-export type Repo = { name: string; stargazers_count: number; pushed_at: string }
+export type Repo = {
+  name: string
+  description: string | null
+  language: string | null
+  fork: boolean
+  stargazers_count: number
+  pushed_at: string
+}
 
-// shortcut: unauthenticated GitHub API allows 60 requests/hour per visitor, live stats just hide above that.
+// shortcut: unauthenticated GitHub API allows 60 requests/hour per visitor, Work falls back to FALLBACK_REPOS above that.
 export function useGithub() {
   const [repos, setRepos] = useState<Repo[]>([])
   useEffect(() => {

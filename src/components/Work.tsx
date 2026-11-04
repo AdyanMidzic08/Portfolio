@@ -1,28 +1,20 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'motion/react'
-import { PROJECTS, TECH, USER, type Preview, type Project } from '../data'
-import { ago, ease, type Repo } from '../lib'
+import { FALLBACK_REPOS, HIDDEN_REPOS, MAX_PROJECTS, STACKS, TECH, USER } from '../data'
+import { ago, type Repo } from '../lib'
 
-const LINES: Record<Exclude<Preview, 'bars'>, string[]> = {
-  http: ['$ curl -i localhost:8080', 'HTTP/1.1 200 OK', 'Content-Type: text/html', '<h1>hello from sockets</h1>'],
-  router: ['$router->get("/", $home);', '$router->get("/about", $about);', '$router->static("/public");', '// listening on tcp://0.0.0.0'],
-  todos: ['[x] Set up Express API', '[x] Build React dashboard', '[x] Add TypeScript types', '[ ] Next feature'],
-  json: ['{', '  "title": "Movie title",', '  "status": "watched",', '  "favorite": true', '}'],
-}
-
-function ProjectPreview({ kind }: { kind: Preview }) {
-  if (kind === 'bars') {
-    return (
-      <div className="pv bars" aria-hidden>
-        {[38, 62, 45, 84, 56, 72, 94].map((h, i) => (
-          <motion.i key={i} initial={{ scaleY: 0 }} whileInView={{ scaleY: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.06, duration: 0.8, ease }} style={{ height: `${h}%` }} />
-        ))}
-      </div>
-    )
-  }
+// Real repo data from the GitHub API, shown as a small JSON response.
+function RepoPreview({ repo }: { repo: Repo }) {
+  const lines = [
+    '{',
+    `  "language": "${repo.language ?? 'n/a'}",`,
+    `  "stars": ${repo.stargazers_count},`,
+    ...(repo.pushed_at ? [`  "updated": "${ago(repo.pushed_at)}"`] : []),
+    '}',
+  ]
   return (
     <div className="pv code" aria-hidden>
-      {LINES[kind].map((l, i) => (
+      {lines.map((l, i) => (
         <motion.code key={i} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.5 }}>{l}</motion.code>
       ))}
     </div>
@@ -35,14 +27,15 @@ function Chip({ name }: { name: string }) {
   return <span className="chip icon" title={name} role="img" aria-label={name}><Icon /></span>
 }
 
-function Card({ p, i, repo }: { p: Project; i: number; repo?: Repo }) {
+function Card({ repo, i }: { repo: Repo; i: number }) {
   const mx = useMotionValue(0.5), my = useMotionValue(0.5)
   const rotateX = useSpring(useTransform(my, [0, 1], [7, -7]), { stiffness: 200, damping: 20 })
   const rotateY = useSpring(useTransform(mx, [0, 1], [-7, 7]), { stiffness: 200, damping: 20 })
+  const stack = STACKS[repo.name] ?? (repo.language ? [repo.language] : [])
   return (
     <motion.a
       className="card"
-      href={`https://github.com/${USER}/${p.repo}`}
+      href={`https://github.com/${USER}/${repo.name}`}
       target="_blank"
       rel="noreferrer"
       style={{ rotateX, rotateY, transformPerspective: 1100 }}
@@ -54,11 +47,11 @@ function Card({ p, i, repo }: { p: Project; i: number; repo?: Repo }) {
       onPointerLeave={() => { mx.set(0.5); my.set(0.5) }}
     >
       <div className="card-head"><span>0{i + 1}</span><span className="arrow">↗</span></div>
-      <ProjectPreview kind={p.preview} />
-      <h3>{p.title}</h3>
-      <p>{p.text}</p>
-      <div className="chips">{p.stack.map((s) => <Chip key={s} name={s} />)}</div>
-      <small>{repo ? `Updated ${ago(repo.pushed_at)}${repo.stargazers_count ? ` · ★ ${repo.stargazers_count}` : ''}` : 'View on GitHub'}</small>
+      <RepoPreview repo={repo} />
+      <h3>{repo.name.replace(/-/g, ' ')}</h3>
+      <p>{repo.description}</p>
+      <div className="chips">{stack.map((s) => <Chip key={s} name={s} />)}</div>
+      <small>View on GitHub</small>
     </motion.a>
   )
 }
@@ -76,7 +69,8 @@ export default function Work({ repos, horizontal }: { repos: Repo[]; horizontal:
   }, [horizontal])
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const x = useTransform(scrollYProgress, [0, 1], [0, -dist])
-  const cards = PROJECTS.map((p, i) => <Card key={p.repo} p={p} i={i} repo={repos.find((r) => r.name === p.repo)} />)
+  const live = repos.filter((r) => !r.fork && r.description && !HIDDEN_REPOS.includes(r.name)).slice(0, MAX_PROJECTS)
+  const cards = (live.length ? live : FALLBACK_REPOS).map((r, i) => <Card key={r.name} repo={r} i={i} />)
   if (!horizontal) {
     return <section id="work" className="section panel"><h2 className="eyebrow">Selected work</h2><div className="stack">{cards}</div></section>
   }
