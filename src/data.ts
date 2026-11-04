@@ -33,9 +33,16 @@ export const TECH: Record<string, IconType> = {
 export const HIDDEN_REPOS = [USER, 'Listen', 'FirstVueApp']
 export const MAX_PROJECTS = 6
 
-// Real screenshots of a project, shown instead of the data panel on its card.
+// Project images, shown instead of the data panel on a card. Movies-API-TS and PDF-Converter use designed covers.
 export const SHOTS: Record<string, string> = {
   Portfolio: 'assets/projects/portfolio.webp',
+  'Expense-Tracker': 'assets/projects/expense-tracker.webp',
+  'Java-Socket': 'assets/projects/java-socket.webp',
+  'PHP-Webserver': 'assets/projects/php-webserver.webp',
+  'Live-Dashboard': 'assets/projects/live-dashboard.webp',
+  'Docker-Starter': 'assets/projects/docker-starter.webp',
+  'Movies-API-TS': 'assets/projects/movies-api.webp',
+  'PDF-Converter': 'assets/projects/pdf-converter.webp',
 }
 
 // GitHub only reports one main language per repo, so the full stack is listed here.
