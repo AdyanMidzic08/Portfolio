@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react'
 import { USER } from '../data'
-import { ago, ease, go, useLang, type Repo } from '../lib'
+import { ago, ease, go, lowPower, useLang, type Repo } from '../lib'
 import { cta, ghostButton, primaryButton } from '../ui'
 import Magnetic from './Magnetic'
 
@@ -57,7 +57,9 @@ export default function Hero({ ready, repos, still }: { ready: boolean; repos: R
       className="relative flex min-h-svh overflow-hidden after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-[22%] after:bg-linear-to-b after:from-transparent after:to-white"
       id="top"
     >
-      {!still && <div className="absolute inset-0"><Suspense fallback={null}><Field /></Suspense></div>}
+      {still || lowPower
+        ? <img className="absolute inset-0 size-full object-cover" src={`${import.meta.env.BASE_URL}assets/wave.webp`} alt="" width={1280} height={800} />
+        : <div className="absolute inset-0"><Suspense fallback={null}><Field /></Suspense></div>}
       <motion.div className="pointer-events-none relative z-1 flex flex-1 flex-col justify-end gap-[clamp(14px,2.4vh,28px)] px-gut pt-24 pb-[clamp(24px,4vh,44px)]" style={{ y, opacity }}>
         <motion.div className="flex justify-between font-mono text-[clamp(12px,1.2vw,15px)] text-accent" initial={{ opacity: 0 }} animate={ready ? { opacity: 1 } : undefined} transition={{ delay: 0.7 }}>
           <Roles />

@@ -63,6 +63,12 @@ export function ago(iso: string, lang: Lang) {
   return days < 30 ? rtf.format(-days, 'day') : rtf.format(-Math.round(days / 30), 'month')
 }
 
+const device = navigator as Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } }
+
+// Phones with few cores or little memory, and anyone with data saver on, get a still image instead of WebGL.
+export const lowPower = Boolean(device.connection?.saveData)
+  || (matchMedia('(pointer: coarse)').matches && (device.hardwareConcurrency <= 4 || (device.deviceMemory ?? 8) < 4))
+
 export function useDesktop() {
   const [desktop, setDesktop] = useState(() => matchMedia('(min-width: 900px)').matches)
   useEffect(() => {
