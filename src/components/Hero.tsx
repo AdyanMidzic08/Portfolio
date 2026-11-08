@@ -13,11 +13,12 @@ function Letters({ word, delay, ready }: { word: string; delay: number; ready: b
       {[...word].map((l, i) => (
         <span className="-mr-[.07em] -mb-[.09em] -ml-[.03em] inline-block overflow-hidden pt-[.03em] pr-[.05em] pb-[.14em] pl-[.03em] tracking-normal" key={i}>
           <motion.span
-            className="inline-block"
+            className="inline-block transition-colors duration-200 hover:text-accent-text"
             initial={{ y: '110%' }}
             animate={ready ? { y: 0 } : undefined}
             transition={{ duration: 1, ease, delay: delay + i * 0.045 }}
-            whileHover={{ color: 'var(--color-accent-text)', y: '-5%', transition: { duration: 0.2 } }}
+            // color stays in CSS: motion would restore the pre-hover color inline and keep the old theme's ink after a toggle
+            whileHover={{ y: '-5%', transition: { duration: 0.2 } }}
           >
             {l}
           </motion.span>
